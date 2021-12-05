@@ -1,0 +1,13 @@
+*notes.py
+*note.py
+__pycache__/
+*__pycache__/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
