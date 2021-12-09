@@ -57,18 +57,13 @@ def order_ref_values(ref_values):
 
     # 3
     rechts_boven = value_minus_value(values_order[8], values_order[6])
-    values_order[2] = [i for i in len_5 if not value_in_value(values_order[1], i)
-                                and value_in_value(rechts_boven, i)][0]
-    values_order[5] = [i for i in len_5 if not value_in_value(values_order[1], i)
-                                and not value_in_value(rechts_boven, i)][0]
+    values_order[2] = [i for i in len_5 if not value_in_value(values_order[1], i) and value_in_value(rechts_boven, i)][0]
+    values_order[5] = [i for i in len_5 if not value_in_value(values_order[1], i) and not value_in_value(rechts_boven, i)][0]
 
     # 4
     links = value_minus_value(values_order[8], values_order[3])
-    values_order[9] = [i for i in len_6 if value_in_value(values_order[1], i)
-                                and not value_in_value(links, i)][0]
-
-    values_order[0] = [i for i in len_6 if value_in_value(values_order[1], i)
-                                and value_in_value(links, i)][0]
+    values_order[9] = [i for i in len_6 if value_in_value(values_order[1], i) and not value_in_value(links, i)][0]
+    values_order[0] = [i for i in len_6 if value_in_value(values_order[1], i) and value_in_value(links, i)][0]
 
     return values_order
 
