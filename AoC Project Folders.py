@@ -1,7 +1,7 @@
 import os
 
 root = "D:\\software development\\AdventOfCode"
-year = "2021"
+year = "2022"
 month = "12"
 
 py_file_content = """\'\'\' Day {{DAY}} of the {{YEAR}} Advent of Code
