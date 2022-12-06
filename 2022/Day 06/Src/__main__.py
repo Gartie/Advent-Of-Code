@@ -14,9 +14,9 @@ def part_x(data, length):
     if len(data) < length:
         raise Exception("Sorry, no solution found")
 
-    lenght_minus = length - 1
-    for index in range(lenght_minus, len(data)):
-        subset = data[index - lenght_minus : index + 1]
+    length_minus = length - 1
+    for index in range(length_minus, len(data)):
+        subset = data[index - length_minus : index + 1]
         subset = set(subset)
         if len(subset) == length:
             return index + 1
