@@ -41,7 +41,7 @@ class TreeNode:
         for child in self.children:
             child.print_self()
 
-    def sum_files(self, int=0):
+    def sum_files(self, int):
         for child in self.children:
             int = child.sum_files(int)
         return int + sum(self.files)
@@ -49,7 +49,7 @@ class TreeNode:
     def sum_files_list(self, int_list=[]):
         for child in self.children:
             int_list.append(child.sum_files())
-            child.sum_files_list()
+            child.sum_files_list(int_list)
 
         return int_list
 
@@ -98,7 +98,7 @@ def part_1(data):
 
     root_node = create_tree(data)
 
-    solution = sum([i for i in root_node.sum_files_list() if i < 100000])
+    solution = sum([i for i in root_node.sum_files_list([]) if i < 100000])
 
     return solution
 
@@ -106,18 +106,16 @@ def part_1(data):
 def part_2(data):
     solution = None
     root_node = create_tree(data)
-    int_list = root_node.sum_files_list()
+    int_list = root_node.sum_files_list([])
 
-    curr_used_mem = root_node.sum_files()
+    curr_used_mem = root_node.sum_files(0)
     needed = 30000000 - (70000000 - curr_used_mem)
 
     for i in sorted(int_list):
         if i >= needed:
             solution = i
             break
-
-    root_node = None
-
+    
     return solution
 
 
