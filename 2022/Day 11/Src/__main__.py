@@ -4,19 +4,18 @@ https://adventofcode.com/2022/day/11/input """
 
 
 from dataclasses import dataclass, field
-from math import floor, prod
+from math import floor, prod, lcm
 
 
 @dataclass
 class Monkey:
     raw_monkey: str = field(repr=False)
     relieve: bool
-    name: str = ""
-    index: int = 0
+    upper_limit_item: int = 0
     items: list = field(default_factory=list)
     operation_oparator: str = ""
-    operation_value: str = ""
-    test_value: str = ""
+    operation_value: int = 0
+    test_value: int = 0
     monkey_index_true: int = 0
     monkey_index_false: int = 0
     inspections: int = 0
@@ -24,23 +23,17 @@ class Monkey:
     def __post_init__(self):
         lines = self.raw_monkey.split("\n")
         lines = [line.strip() for line in lines]
-
         lines[1] = lines[1][16:]
         lines[1] = lines[1].replace(" ", "")
         self.items = [int(value) for value in lines[1].split(",")]
-
-        self.name = lines[0].strip(":")
-        self.index = int(self.name[6:])
-
+        self.test_value = int(lines[3][19:])
+        self.monkey_index_true = int(lines[4][24:])
+        self.monkey_index_false = int(lines[5][25:])
         self.operation_oparator, opp_value = lines[2][21:].split(" ")
         if opp_value == "old":
             self.operation_value = 0
         else:
             self.operation_value = int(opp_value)
-
-        self.test_value = int(lines[3][19:])
-        self.monkey_index_true = int(lines[4][24:])
-        self.monkey_index_false = int(lines[5][25:])
 
     def inspect_items(self):
         self.inspections = self.inspections + len(self.items)
@@ -50,7 +43,7 @@ class Monkey:
             value = -1
 
             # determin the righthand value of the equation
-            if self.operation_value:
+            if not self.operation_value:
                 value = item
             else:
                 value = self.operation_value
@@ -65,9 +58,17 @@ class Monkey:
                     "Operation_oparator unknown: " + self.operation_oparator
                 )
 
-            LCM = 9699690
-            while value > LCM:
-                value -= LCM
+            # prevent overflow and delays due to large value
+            """ Post goldenstars ajustment
+            At first i used the following 2 lines to reduce value, thinking that % would cause issues
+            # while value > LCM:
+            #     value -= LCM
+            
+            After study-ing and running code written by Bas Langenberg, i implemented %=
+            This reduced the running time of part 2, dramaticly! From an hour, to a second!
+            https://github.com/BasLangenberg/aoc/blob/main/python/2022/11/day-p2.py
+            """
+            value %= self.upper_limit_item
 
             # calm down and devide by 3, or dont and panic about int overruns!
             if self.relieve:
@@ -95,11 +96,15 @@ def load_data(Path):
 
 def part_x(raw_monkeys, relieve, rounds):
     solution = None
+
     monkeys = [Monkey(monkey, relieve) for monkey in raw_monkeys]
+    test_values = [monkey.test_value for monkey in monkeys]
+    LCM = lcm(*[monkey.test_value for monkey in monkeys])
+
+    for monkey in monkeys:
+        monkey.upper_limit_item = LCM
 
     for x in range(rounds):
-        if x and x % 100 == 0:
-            print("Still working, on", x, "now")
         for monkey in monkeys:
             items = monkey.inspect_items()
             for destination, value in items:
@@ -120,10 +125,11 @@ def main():
     rounds_part_1 = 20
     rounds_part_2 = 10000
 
+    # Part 1
     assert part_x(data_test, relieved_part_1, rounds_part_1) == 10605
     assert part_x(data, relieved_part_1, rounds_part_1) == 66802
-
-    print("This does take a while, but does work :)")
+    # Part 2
+    assert part_x(data_test, relieved_part_2, rounds_part_2) == 2713310158
     assert part_x(data, relieved_part_2, rounds_part_2) == 21800916620
 
 
