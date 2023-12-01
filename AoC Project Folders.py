@@ -1,7 +1,7 @@
 import os
 
-root = "D:\\software development\\AdventOfCode"
-year = "2022"
+root = r"D:\Advent-Of-Code"
+year = "2023"
 month = "12"
 
 py_file_content = """\'\'\' Day {{DAY}} of the {{YEAR}} Advent of Code
@@ -45,6 +45,7 @@ if __name__ == "__main__":
 """
 
 for n in range(1, 26):
+    n1 = n
     n = str(n)
     if len(n) == 1:
         n = "0" + n
@@ -60,7 +61,7 @@ for n in range(1, 26):
     data_file_path = f"{data_path}\\Prod.txt"
     data_test_file_path = f"{data_path}\\Test.txt"
     todays_py_file_content = py_file_content.replace("{{YEAR}}", year)
-    todays_py_file_content = todays_py_file_content.replace("{{DAY}}", str(n))
+    todays_py_file_content = todays_py_file_content.replace("{{DAY}}", str(n1))
 
     os.makedirs(project_path)
     os.makedirs(src_path)
