@@ -1,11 +1,11 @@
-''' Day 1 of the 2023 Advent of Code
+""" Day 1 of the 2023 Advent of Code
 https://adventofcode.com/2023/day/1
-https://adventofcode.com/2023/day/1/input '''
+https://adventofcode.com/2023/day/1/input """
 
 
 def load_data(Path):
     data_list = []
-    with open(Path, 'r') as file:
+    with open(Path, "r") as file:
         [data_list.append(line.strip()) for line in file]
     return data_list
 
@@ -20,16 +20,15 @@ def add_digets_to_letters(input):
         ["six", "si6x"],
         ["seven", "sev7en"],
         ["eight", "eig8ht"],
-        ["nine", "ni9ne"]
+        ["nine", "ni9ne"],
     ]
-
 
     for rep in replacements:
         input = input.replace(rep[0], rep[1])
-    
+
     return input
-    
-    
+
+
 def solve(input, with_replace):
     total = 0
     for line in input:
@@ -45,24 +44,23 @@ def solve(input, with_replace):
     return total
 
 
-    
 def part_1(data):
-    solution = None    
+    solution = None
     solution = solve(data, False)
     return solution
 
-    
+
 def part_2(data):
     solution = None
     solution = solve(data, True)
-    return solution    
+    return solution
 
 
 def main():
     data = load_data("..//Data//Prod.txt")
     data_test_part_one = load_data("..//Data//TestP1.txt")
     data_test_part_two = load_data("..//Data//TestP2.txt")
-    
+
     assert part_1(data_test_part_one) == 142
     assert part_1(data) == 55538
     assert part_2(data_test_part_two) == 281
