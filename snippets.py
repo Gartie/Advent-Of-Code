@@ -1,7 +1,14 @@
-from dataclasses import dataclass
-from typing import List
+
+
+winning_numbers = [*map(int, "4 5 6 7 8 5".split())]
+# [4, 5, 6, 7, 8, 5]
+
 
 # Dataclasses
+# Check 2023/02
+# Check 2023/03
+from dataclasses import dataclass
+from typing import List
 
 @dataclass
 class Round:
@@ -17,7 +24,12 @@ class Game:
     
     
     
-# 2d matrix print
+# 2d matrix 
+# Check 2023/03
+
+
+
+# 2d matrix Print
 def get_martix_header_indexes(data_width, witch_header, padding):
     assert witch_header in [1, 10, 100, 1000]
     wh = witch_header
