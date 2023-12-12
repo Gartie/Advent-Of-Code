@@ -1,6 +1,6 @@
 
 
-winning_numbers = [*map(int, "4 5 6 7 8 5".split())]
+int_list = [*map(int, "4 5 6 7 8 5".split())]
 # [4, 5, 6, 7, 8, 5]
 
 
@@ -74,3 +74,4 @@ def print_matrix(data):
     [print(str(i).rjust(padding_width)+column_suffix, d, sep="") for i, d in enumerate(data)]
     print()
     print()
+# 2d matrix Print - End
