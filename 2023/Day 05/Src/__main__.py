@@ -34,6 +34,14 @@ def load_data(Path):
 
     return (seeds, data_list)
 
+def run_trough_maps(seed, maps):
+    for cur_map in maps:
+        for dest, source, rang in cur_map:
+            if seed >= source and seed < source+rang:
+                seed = seed + (dest - source)
+                break
+    return seed
+    
     
 def part_1(data):
     solution = None
@@ -41,11 +49,7 @@ def part_1(data):
     locations = []
 
     for seed in seeds:
-        for cur_map in maps:
-            for dest, source, rang in cur_map:
-                if seed >= source and seed < source+rang:
-                    seed = seed + (dest - source)
-                    break
+        seed = run_trough_maps(seed, maps)
         locations.append(seed)
 
     solution = min(locations)
@@ -59,15 +63,9 @@ def part_2(data):
     locations = []
     for i in range(0, len(seeds), 2):
         for seed in range(seeds[i], seeds[i]+seeds[i+1]):
-            for cur_map in maps:
-                for dest, source, rang in cur_map:
-                    if seed >= source and seed < source+rang:
-                        seed = seed + (dest - source)
-                        break
-                        
-        locations.append(seed)
+            seed = run_trough_maps(seed, maps)
+            locations.append(seed)
 
-    print(locations)
     solution = min(locations)
 
     return solution    
@@ -82,7 +80,7 @@ def main():
     assert part_2(data_test) == 46
     # assert part_2(data) == None
     
-    print(part_2(data_test))
+    # print(part_2(data_test))
     # print(part_2(data))
 
 
