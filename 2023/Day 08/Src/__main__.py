@@ -50,8 +50,6 @@ def part_1(data):
 
 def part_2(data):
     solution = 1
-    instructions = data[0]
-    nodes        = data[1]
     starting_nodes = [n for n in nodes if n.endswith("A")]
 
     for node in starting_nodes:
