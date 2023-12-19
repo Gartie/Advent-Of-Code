@@ -2,8 +2,6 @@
 https://adventofcode.com/2023/day/14
 https://adventofcode.com/2023/day/14/input '''
 
-
-
 def load_data(Path):
     data_list = []
     with open(Path, 'r') as file:
@@ -93,7 +91,12 @@ def load_north(data):
     
     return load
     
+def matrix_to_str(grid):
+    return "\n".join(["".join(line) for line in grid])
     
+def str_to_matrix(s):
+    return s.split("\n")
+  
 def part_1(data):
     solution = None
 
@@ -105,6 +108,28 @@ def part_1(data):
     
 def part_2(data):
     solution = None
+    target_iterations = 10**9
+
+    seen = []
+    first_loop_index = -1
+    second_loop_index = -1
+    
+    
+    for i in range(target_iterations): 
+        data = tilt_cycle(data)
+        as_str = matrix_to_str(data)
+        if as_str in seen:
+            first_loop_index = seen.index(as_str)
+            second_loop_index = i
+            break
+        seen.append(as_str)
+        
+    to_process_cycles = target_iterations - (first_loop_index+1)
+    loop_ofset = to_process_cycles%(second_loop_index - first_loop_index)
+    
+    winning_grid = seen[first_loop_index+loop_ofset]
+    winning_grid = str_to_matrix(winning_grid)
+    solution = load_north(winning_grid)
     
     return solution    
 
@@ -115,14 +140,9 @@ def main():
     
     assert part_1(data_test) == 136
     assert part_1(data) == 109596
-    # assert part_2(data_test) == None
-    # assert part_2(data) == None
+    assert part_2(data_test) == 64
+    assert part_2(data) == 96105
     
-    # print(part_1(data_test))
-    # print(part_1(data))
-    # print(part_2(data_test))
-    # print(part_2(data))
-
 
 if __name__ == "__main__":
     main()
