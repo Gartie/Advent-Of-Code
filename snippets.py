@@ -27,6 +27,12 @@ class Game:
 # 2d matrix 
 # Check 2023/03
 
+# Rotate 2d matrix
+def rotate_ccw(li):
+	return list(zip(*li))[::-1]
+	
+def rotate_cw(li):
+    return list(zip(*li[::-1]))
 
 
 # 2d matrix Print
