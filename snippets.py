@@ -33,7 +33,21 @@ def rotate_ccw(li):
 	
 def rotate_cw(li):
     return list(zip(*li[::-1]))
+# Rotate 2d matrix - END
 
+
+# Load matrix with added border
+def load_data(Path):
+    data_list = []
+    border_char = "#"
+    with open(Path, "r") as file:
+        [data_list.append(border_char + line.strip() + border_char) for line in file]
+
+    data_list.insert(0, border_char * len(data_list[0]))
+    data_list.append(border_char * len(data_list[0]))
+
+    return data_list
+# Load matrix with added border - END
 
 # 2d matrix Print
 def get_martix_header_indexes(data_width, witch_header, padding):

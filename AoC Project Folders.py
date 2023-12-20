@@ -29,14 +29,14 @@ def main():
     data = load_data("..//Data//Prod.txt")
     data_test = load_data("..//Data//Test.txt")
     
-    assert part_1(data_test) == None
-    assert part_1(data) == None
-    assert part_2(data_test) == None
-    assert part_2(data) == None
+    # assert part_1(data_test) == None
+    # assert part_1(data) == None
+    # assert part_2(data_test) == None
+    # assert part_2(data) == None
     
     print(part_1(data_test))
     # print(part_1(data))
-    print(part_2(data_test))
+    # print(part_2(data_test))
     # print(part_2(data))
 
 
