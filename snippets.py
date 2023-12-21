@@ -95,3 +95,9 @@ def print_matrix(data):
     print()
     print()
 # 2d matrix Print - End
+
+# named tuple
+from collections import namedtuple
+
+Beam = namedtuple("Beam", ["r", "c", "direction"])
+# named tuple - END
